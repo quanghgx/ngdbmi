@@ -63,7 +63,7 @@ function gdbProcessWrapper(command_and_args) {
 
         /* Start the process */
         try {
-            this.gdb_instance = spawn("gdb", gdb_args, {detached: true});
+            this.gdb_instance = spawn("/opt/gcc-arm-none-eabi-5_4-2016q3/bin/arm-none-eabi-gdb", gdb_args, {detached: true});
         } catch (e) {
             console.log("Error launching the gdb child process");
             console.dir(e);
@@ -716,10 +716,10 @@ function commandList() {
     this.insert(new command("exit", "-gdb-exit", []));
     this.insert(new command("set", "-gdb-set",
             [
-                new commandParam("name", true, "", "argOnly", ["string"], " $"),
-                new commandParam("value", true, "", "argOnly", ["string"], "=")
+                new commandParam("name", true, "", "argOnly", ["string"]),
+                new commandParam("value", true, "", "argOnly", ["string"])
             ]));
-    this.insert(new command("show", "-target-select",
+    this.insert(new command("show", "-gdb-show",
             [
                 new commandParam("name", true, "", "argOnly", ["string"])
             ]));
